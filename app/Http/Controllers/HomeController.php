@@ -25,40 +25,10 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        // $user = User::find(1);
-        // $roles = $user->roles;
-
-        // $data = $request->session()->all();
-        // dd($data);
-        //
-        // foreach ($roles as $role) {
-        //     dd($role);
-        // }
-        //
-        // dd($roles);
-
-
-        // dd("ASD");
         return view('home');
     }
 
     public function welcome()
-    {
-        return view('welcome');
-    }
-    public function nada1()
-    {
-        return view('welcome');
-    }
-    public function nada2()
-    {
-        return view('welcome');
-    }
-    public function nada3()
-    {
-        return view('welcome');
-    }
-    public function nada4()
     {
         return view('welcome');
     }

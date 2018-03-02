@@ -28,11 +28,6 @@ Route::middleware(['authenticated'])->group(function () {
 // ROUTE HOME
 Route::get('/home', ['as' => 'home', 'uses'=>'HomeController@index']);
 Route::get('/welcome', ['as' => 'home/welcome', 'uses'=>'HomeController@welcome']);
-Route::get('/nada1', ['as' => 'home/nada1', 'uses'=>'HomeController@nada1']);
-Route::get('/nada2', ['as' => 'home/nada2', 'uses'=>'HomeController@nada2']);
-Route::get('/nada3', ['as' => 'home/nada3', 'uses'=>'HomeController@nada3']);
-Route::get('/nada4', ['as' => 'home/nada4', 'uses'=>'HomeController@nada4']);
-Route::get('/nada5', ['as' => 'home/nada5', 'uses'=>'HomeController@nada5']);
 
 /* ROUTES USERS */
 // Eliminar Usuario

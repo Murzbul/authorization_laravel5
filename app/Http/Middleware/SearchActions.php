@@ -47,6 +47,8 @@ class SearchActions
 
     public function handle( $request, Closure $next )
     {
+        $response = $next($request);
+        
         $routeCollection = Route::getRoutes();
         $actions = Action::all();
 
@@ -113,7 +115,7 @@ class SearchActions
                 }
             }
 
-            // Modified actions when route change in RouteCollection
+            // Mofied actions when route change in RouteCollection
             // Note: If change routes without route has uses is different in actions
             $_routeCollection = Route::getRoutes()->getRoutes();
             $_actions = Action::all();
