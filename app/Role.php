@@ -67,4 +67,22 @@ class Role extends Model
 
                                         ORDER BY role_name"));
     }
+
+    public static function getRolesHasActionsStatus()
+    {
+        $actions = Action::all();
+        $actionsByRole = array();
+
+        foreach ( $actions as $key => $action )
+        {
+            $actionsByRole[$action->uses] = Action::getActionsByRole( $action->id );
+        }
+
+        return $actionsByRole;
+    }
+
+    public static function getRolesHasUsers()
+    {
+        return DB::select(DB::raw("SELECT user_id, role_id FROM users_has_roles"));
+    }
 }

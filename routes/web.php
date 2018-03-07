@@ -59,16 +59,8 @@ Route::get('rol/asignar_rol', ['as' => 'role/assign_role', 'uses'=>'RoleControll
 Route::middleware(['search.actions'])->group(function ()
 {
     /* ROUTES ACTIONS */
-    // Eliminar Accion
-    Route::get('accion/eliminar/{id}', ['as' => 'action/delete', 'uses'=>'ActionController@delete']);
-    // Listar Acciones
-    Route::get('accion/listar', ['as' => 'action/list', 'uses'=>'ActionController@list']);
-    // Crear Acción
-    Route::post('accion/crear', ['as' => 'action/create', 'uses'=>'ActionController@create']);
-    // Editar Acción
-    Route::get('accion/editar/{id}', ['as' => 'action/edit', 'uses'=>'ActionController@edit']);
     // Asignando acciones a roles
-    Route::get('accion/asignando_accion', ['as' => 'action/assign_action', 'uses'=>'RoleController@assignedAction']);
+    Route::get('accion/asignando_accion', ['as' => 'action/assigned_action', 'uses'=>'ActionController@assignedAction']);
     // Asignar acciones a roles
-    Route::get('accion/asignar_accion', ['as' => 'action/assigned_action', 'uses'=>'RoleController@assignAction']);
+    Route::get('accion/asignar_accion', ['as' => 'action/assign_action', 'uses'=>'ActionController@assignAction']);
 });

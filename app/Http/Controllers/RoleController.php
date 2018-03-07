@@ -100,9 +100,8 @@ class RoleController extends Controller
         $users_has_roles = User::getUsersHasRolesStatus();
         $roles = Role::orderBy('name')->get();
         $users = User::all();
-        $countUsersHasRoles = count($users_has_roles);
 
-        return view('role/assigned_role', [ 'users' => $users, 'roles' => $roles, 'users_has_roles' => $users_has_roles, 'countUsersHasRoles' => $countUsersHasRoles ] );
+        return view('role/assigned_role', [ 'users' => $users, 'roles' => $roles, 'users_has_roles' => $users_has_roles ] );
     }
 
     public function assignRole( Request $request )
@@ -111,6 +110,8 @@ class RoleController extends Controller
 
         try
         {
+            $sync_data = array();
+
             foreach ( $respond as $key => $value )
             {
                 if( $key != '_token' and $key != 'table_length'  )
@@ -119,17 +120,29 @@ class RoleController extends Controller
                     $user_id = $user_role[0];
                     $role_id = $user_role[1];
 
-                    $user = User::find( $user_id );
-
-                    if ( $value == "on" )
+                    if ( array_key_exists( $user_id, $sync_data ) === false )
                     {
-                        $user->roles()->attach($role_id);
+                        $sync_data[$user_id] = array();
+
+                        if ( $value == "on" )
+                        {
+                            array_push( $sync_data[$user_id], $role_id );
+                        }
                     }
                     else
                     {
-                        $user->roles()->detach($role_id);
+                        if ( $value == "on" )
+                        {
+                            array_push( $sync_data[$user_id], $role_id );
+                        }
                     }
                 }
+            }
+
+            foreach ( $sync_data as $user_id => $roles_id )
+            {
+                $user = User::find( $user_id );
+                $user->roles()->sync($roles_id);
             }
 
             $request->session()->flash('message.level', 'success');
@@ -138,6 +151,8 @@ class RoleController extends Controller
         }
         catch (\Exception $e)
         {
+            dd($e);
+
             $request->session()->flash('message.level', 'danger');
             $request->session()->flash('message.content', 'Los roles no se han actualizado correctamente');
         }
