@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Role as Role;
 
 class User extends Authenticatable
 {
@@ -30,5 +31,18 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany('App\Role', 'users_has_roles');
+    }
+
+    public static function getUsersHasRolesStatus()
+    {
+        $users = self::all();
+        $rolesByUser = array();
+
+        foreach ( $users as $key => $user )
+        {
+            $rolesByUser[$user->name] = Role::getRolesByUser( $user->id );
+        }
+
+        return $rolesByUser;
     }
 }

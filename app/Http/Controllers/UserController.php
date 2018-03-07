@@ -41,9 +41,9 @@ class UserController extends Controller
                     $request->session()->flash('message.level', 'success');
                     $request->session()->flash('message.content', 'El usuario fue creado con exito');
 
-                    $role = Role::find(1);
-                    $last_user = User::where('email', $request->email)->first();
-                    $last_user->roles()->attach( $role->id );
+                    // $role = Role::find(1);
+                    // $last_user = User::where('email', $request->email)->first();
+                    // $last_user->roles()->attach( $role->id );
 
                     return redirect()->route( 'user/list' );
                 }

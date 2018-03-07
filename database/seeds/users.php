@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class users extends Seeder
+class Users extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,12 +11,12 @@ class users extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert(array(
-           'name' => "admin",
-           'email'  => "admin@laravel.com",
-           'password'  => bcrypt("1234"),
-           'created_at' => date('Y-m-d H:m:s'),
-           'updated_at' => date('Y-m-d H:m:s')
-        ));
+      DB::table('users')->insert(array(
+         'name' => "admin",
+         'email'  => "admin@laravel.com",
+         'password'  => bcrypt("1234"),
+         'created_at' => date('Y-m-d H:m:s'),
+         'updated_at' => date('Y-m-d H:m:s')
+      ));
     }
 }

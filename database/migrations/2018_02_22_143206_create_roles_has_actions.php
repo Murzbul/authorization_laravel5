@@ -19,7 +19,6 @@ class CreateRolesHasActions extends Migration
           $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
           $table->integer('action_id')->unsigned()->index();
           $table->foreign('action_id')->references('id')->on('actions')->onDelete('cascade');
-          $table->timestamps();
       });
   }
 

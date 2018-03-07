@@ -52,7 +52,9 @@ Route::post('rol/crear', ['as' => 'role/create', 'uses'=>'RoleController@create'
 Route::get('rol/editando/{id}', ['as' => 'role/editing', 'uses'=>'RoleController@editing']);
 // Editado Rol
 Route::post('rol/editado/{id}', ['as' => 'role/edited', 'uses'=>'RoleController@edited']);
-
+// Asignar roles a usuarios
+Route::get('rol/asignando_rol', ['as' => 'role/assigned_role', 'uses'=>'RoleController@assignedRole']);
+Route::get('rol/asignar_rol', ['as' => 'role/assign_role', 'uses'=>'RoleController@assignRole']);
 
 Route::middleware(['search.actions'])->group(function ()
 {
@@ -65,4 +67,8 @@ Route::middleware(['search.actions'])->group(function ()
     Route::post('accion/crear', ['as' => 'action/create', 'uses'=>'ActionController@create']);
     // Editar Acción
     Route::get('accion/editar/{id}', ['as' => 'action/edit', 'uses'=>'ActionController@edit']);
+    // Asignando acciones a roles
+    Route::get('accion/asignando_accion', ['as' => 'action/assign_action', 'uses'=>'RoleController@assignedAction']);
+    // Asignar acciones a roles
+    Route::get('accion/asignar_accion', ['as' => 'action/assigned_action', 'uses'=>'RoleController@assignAction']);
 });

@@ -48,7 +48,7 @@ class SearchActions
     public function handle( $request, Closure $next )
     {
         $response = $next($request);
-        
+
         $routeCollection = Route::getRoutes();
         $actions = Action::all();
 
@@ -138,7 +138,8 @@ class SearchActions
                 }
             }
 
-            return $response;
         }
+
+        return $response;
     }
 }

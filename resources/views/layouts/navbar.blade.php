@@ -28,16 +28,14 @@
                 <ul class="dropdown-menu">
                   <li class="{{ $user_active }}" ><a href="{{ url('usuario/listar') }}">Usuarios</a></li>
                   <li class="{{ $role_active }}" ><a href="{{ url('rol/listar') }}">Roles</a></li>
-                  <li class="{{ $action_active }}" ><a href="{{ url('accion/listar') }}">Acciones</a></li>
                 </ul>
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Asignaciones
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li class="{{ $user_active }}" ><a href="{{ url('usuario/listar') }}">Usuarios</a></li>
-                  <li class="{{ $role_active }}" ><a href="{{ url('rol/listar') }}">Roles</a></li>
-                  <li class="{{ $action_active }}" ><a href="{{ url('accion/listar') }}">Acciones</a></li>
+                  <li class="" ><a href="{{ url('rol/asignando_rol') }}">Asignar roles a usuarios</a></li>
+                  <li class="" ><a href="{{ url('accion/asignando_accion') }}">Asignar acciones a roles</a></li>
                 </ul>
             </li>
         </ul>

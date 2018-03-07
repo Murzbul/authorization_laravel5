@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Database\QueryException as QueryException;
 use Illuminate\Http\Request;
 use App\Role as Role;
+use App\User as User;
 
 class RoleController extends Controller
 {
@@ -92,6 +93,56 @@ class RoleController extends Controller
 
             return redirect()->route( 'role/list' );
         }
+    }
+
+    public function assignedRole( Request $request )
+    {
+        $users_has_roles = User::getUsersHasRolesStatus();
+        $roles = Role::orderBy('name')->get();
+        $users = User::all();
+        $countUsersHasRoles = count($users_has_roles);
+
+        return view('role/assigned_role', [ 'users' => $users, 'roles' => $roles, 'users_has_roles' => $users_has_roles, 'countUsersHasRoles' => $countUsersHasRoles ] );
+    }
+
+    public function assignRole( Request $request )
+    {
+        $respond = $request->all();
+
+        try
+        {
+            foreach ( $respond as $key => $value )
+            {
+                if( $key != '_token' and $key != 'table_length'  )
+                {
+                    $user_role = explode( '-', $key );
+                    $user_id = $user_role[0];
+                    $role_id = $user_role[1];
+
+                    $user = User::find( $user_id );
+
+                    if ( $value == "on" )
+                    {
+                        $user->roles()->attach($role_id);
+                    }
+                    else
+                    {
+                        $user->roles()->detach($role_id);
+                    }
+                }
+            }
+
+            $request->session()->flash('message.level', 'success');
+            $request->session()->flash('message.content', 'Los roles se han actualizado correctamente');
+
+        }
+        catch (\Exception $e)
+        {
+            $request->session()->flash('message.level', 'danger');
+            $request->session()->flash('message.content', 'Los roles no se han actualizado correctamente');
+        }
+
+        return redirect('rol/asignando_rol');
     }
 
 }
