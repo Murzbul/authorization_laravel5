@@ -13,11 +13,7 @@ class ActionController extends Controller
     {
         $roles_has_actions = Role::getRolesHasActionsStatus();
         $actions = Action::orderBy('name')->get();
-        $roles = Role::all();
-
-        // dump($roles_has_actions);
-        // dump($actions);
-        // dd($roles);
+        $roles = Role::orderBy('name')->get();
 
         return view('action/assigned_action', [ 'roles' => $roles, 'actions' => $actions, 'roles_has_actions' => $roles_has_actions ] );
     }
@@ -59,7 +55,6 @@ class ActionController extends Controller
 
                 }
             }
-            // dd($sync_data);
 
             foreach ( $sync_data as $action_id => $roles_id )
             {
