@@ -3,6 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Route as Route;
+use App\Action as Action;
+use App\Role as Role;
+use App\Config as Config;
 
 class Authorized
 {
@@ -15,17 +19,33 @@ class Authorized
      */
     public function handle($request, Closure $next)
     {
-          $response = $next($request);
+         $response = $next( $request );
 
-          // Setting user data in session with role
-          $user = User::find(Auth::user()->id);
-          $roles = $user->roles;
+         $currentActionUses = explode("App\Http\Controllers\\", Route::currentRouteAction())[1];
+         $success = false;
+         $currentAction = Action::where('uses', $currentActionUses)->get()->all()[0];
+         $roles = $request->session()->all()["roles"];
 
-          $request->session()->put('username', $user->name);
-          $request->session()->put('roles', $roles);
 
-          dd($request->session()->all());
+         foreach ( $roles as $role )
+         {
+             $actions = $role->actions;
 
-          return $response;
+             foreach ( $actions as $action )
+             {
+                 if ( $action->uses == $currentActionUses )
+                 {
+                     $success = true;
+                     break;
+                 }
+             }
+         }
+
+         if( !$success )
+         {
+             return abort(403, 'No está autorizado para ejecutar esta acción.');
+         }
+
+         return $response;
     }
 }

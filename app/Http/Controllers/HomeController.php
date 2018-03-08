@@ -25,11 +25,11 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        return view('home');
+        return redirect('login');
     }
 
-    public function welcome()
+    public function welcome( Request $request )
     {
-        return view('welcome');
+        return view('home');
     }
 }

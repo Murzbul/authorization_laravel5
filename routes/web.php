@@ -15,16 +15,20 @@
 // Route::resource('rol','MovieController');
 
 // VER DESPUES
-// Route::get('/', ['as' => 'user/welcome', 'uses'=>'Auth\LoginController@login']);
 
 Auth::routes();
 
 Route::middleware(['authenticated'])->group(function () {
 
-    Route::post('login', 'Auth\LoginController@login')->name('login');
+    Route::post('login', ['as' => 'login', 'uses' => 'Auth\LoginController@login']);
+    Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
+    Route::get('/', ['as' => 'home/index', 'uses'=>'HomeController@index']);
+
+});
+
+Route::middleware(['auth', 'authenticated', 'authorized'])->group(function () {
 
     // ROUTE HOME
-    Route::get('/home', ['as' => 'home', 'uses'=>'HomeController@index']);
     Route::get('/welcome', ['as' => 'home/welcome', 'uses'=>'HomeController@welcome']);
 
     /* ROUTES USERS */
@@ -56,7 +60,7 @@ Route::middleware(['authenticated'])->group(function () {
 
 });
 
-Route::middleware(['authenticated', 'search.actions'])->group(function ()
+Route::middleware(['auth','authenticated', 'authorized', 'search.actions'])->group(function ()
 {
     /* ROUTES ACTIONS */
     // Asignando acciones a roles
