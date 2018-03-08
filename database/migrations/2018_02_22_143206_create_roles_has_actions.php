@@ -20,6 +20,9 @@ class CreateRolesHasActions extends Migration
           $table->integer('action_id')->unsigned()->index();
           $table->foreign('action_id')->references('id')->on('actions')->onDelete('cascade');
       });
+
+      DB::select(DB::raw("ALTER TABLE roles_has_actions
+                          ADD PRIMARY KEY role_id_action_id (role_id, action_id)"));
   }
 
   /**

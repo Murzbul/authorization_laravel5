@@ -20,6 +20,9 @@ class CreateUsersHasRolesTable extends Migration
             $table->integer('role_id')->unsigned()->index();
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
+
+        DB::select(DB::raw("ALTER TABLE users_has_roles
+                            ADD PRIMARY KEY user_id_role_id (user_id, role_id)"));
     }
 
     /**

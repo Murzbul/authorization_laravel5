@@ -1,5 +1,7 @@
 <?php
 
+use App\ConfigSystem as ConfigSystem;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,12 +18,28 @@
 
 // VER DESPUES
 
+/*$auth = ConfigSystem::where("key", "auth")->get()[0]->value;
+$authorized = ConfigSystem::where("key", "authorized")->get()[0]->value;
+$midd = array();
+$auth_midd = array();
+
+if( $auth == "true" )
+{
+    array_push($midd, "auth");
+}
+if ( $authorized == "true" )
+{
+    array_push($midd, "authenticated");
+    array_push($midd, "authorized");
+    array_push($auth_midd, 'authenticated');
+}*/
+
 Auth::routes();
 
 Route::middleware(['authenticated'])->group(function () {
 
-    Route::post('login', ['as' => 'login', 'uses' => 'Auth\LoginController@login']);
     Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
+    Route::post('login', ['as' => 'login', 'uses' => 'Auth\LoginController@login']);
     Route::get('/', ['as' => 'home/index', 'uses'=>'HomeController@index']);
 
 });
@@ -30,6 +48,12 @@ Route::middleware(['auth', 'authenticated', 'authorized'])->group(function () {
 
     // ROUTE HOME
     Route::get('/welcome', ['as' => 'home/welcome', 'uses'=>'HomeController@welcome']);
+
+    // Routes password reset
+    Route::post('password/email', ['as' => 'password.email', 'uses'=>'Auth\ForgotPasswordController@sendResetLinkEmail']);
+    Route::get('password/reset', ['as' => 'password.request', 'uses'=>'Auth\ForgotPasswordController@showLinkRequestForm']);
+    Route::post('password/reset', ['as' => 'password.resetForm', 'uses'=>'Auth\ResetPasswordController@reset ']);
+    Route::get('password/reset/{token}', ['as' => 'password.reset', 'uses'=>'Auth\ResetPasswordController@showResetForm ']);
 
     /* ROUTES USERS */
     // Eliminar Usuario

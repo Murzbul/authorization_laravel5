@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Support\Facades\Route as Route;
 use App\Action as Action;
 use App\Role as Role;
-use App\Config as Config;
+use App\ConfigSystem as ConfigSystem;
 
 class Authorized
 {
@@ -26,25 +26,27 @@ class Authorized
          $currentAction = Action::where('uses', $currentActionUses)->get()->all()[0];
          $roles = $request->session()->all()["roles"];
 
-
-         foreach ( $roles as $role )
+         if( ConfigSystem::where("key", "authorized")->get()[0]->value != "false" )
          {
-             $actions = $role->actions;
-
-             foreach ( $actions as $action )
+             foreach ( $roles as $role )
              {
-                 if ( $action->uses == $currentActionUses )
+                 $actions = $role->actions;
+
+                 foreach ( $actions as $action )
                  {
-                     $success = true;
-                     break;
+                     if ( $action->uses == $currentActionUses )
+                     {
+                         $success = true;
+                         break;
+                     }
                  }
              }
-         }
 
-         if( !$success )
-         {
-             return abort(403, 'No está autorizado para ejecutar esta acción.');
-         }
+             if( !$success )
+             {
+                 return abort(403, 'No está autorizado para ejecutar esta acción.');
+             }
+        }
 
          return $response;
     }

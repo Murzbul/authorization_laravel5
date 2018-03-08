@@ -15,6 +15,7 @@ class Users extends Seeder
          'name' => "admin",
          'email'  => "admin@laravel.com",
          'password'  => bcrypt("1234"),
+         'visibility'  => 1,
          'created_at' => date('Y-m-d H:m:s'),
          'updated_at' => date('Y-m-d H:m:s')
       ));
