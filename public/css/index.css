@@ -1,0 +1,12 @@
+/* Index CSS */
+.navbar
+  {
+      padding: 0.3rem;
+      padding-left: 0.3rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+  }
+  #logout
+  {
+      cursor: pointer;
+  }
