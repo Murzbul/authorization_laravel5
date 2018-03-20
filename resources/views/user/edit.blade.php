@@ -2,8 +2,8 @@
 
 @section('main-content')
 
-<div class="row">
-      <div class="col-md-10 col-md-push-1">
+<div class="row justify-content-center">
+      <div class="col-md-9 col-md-push-1">
 
           <h2 class="text-center">Editar Usuario</h2>
 

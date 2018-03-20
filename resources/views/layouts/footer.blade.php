@@ -1,6 +1,12 @@
 <br>
-<footer class="col-md-12 text-center">
-  <div id="copyright text-right">Modernizacion del Estado - Mar Chiquita</div>
-</footer>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<hr>
+<div class="row justify-content-center">
+  <div class="col-10 col-md-10  text-center">
+    <blockquote class="blockquote" cite="http://">
+        <p class="mb-0">Modernización del Estado</p>
+        <footer class="blockquote-footer">
+          <p>Partido de Mar Chiquita</p>
+        </footer>
+    </blockquote>
+  </div>
+</div>

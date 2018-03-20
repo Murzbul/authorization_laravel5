@@ -14,14 +14,31 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
 
+    <style media="screen">
+    #app  {
+        margin-top: 5%;
+    }
+    #logout
+    {
+        cursor: pointer;
+    }
+
+    </style>
+
 </head>
 <body>
 
-    @section('navbar')
-      @include('layouts.navbar')
-    @show
+    @if( Session::get('username') == 'anonymous' )
+      @section('navbar')
+          @include('layouts.navbar_logout')
+      @show
+    @else
+      @section('navbar')
+          @include('layouts.navbar')
+      @show
+    @endif
 
-    <div id="app">
+    <div class="container-fluid" id="app">
 
         <main class="py-4">
             @yield('content')

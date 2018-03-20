@@ -2,6 +2,8 @@
 
 @section('main-content')
 
+<div class="row justify-content-center">
+    <div class="col-12 col-sm-12 col-md-9 col-lg-9">
     <h2 class="text-center">Lista de Acciones</h2>
 
     @if(session()->has('message.level'))
@@ -54,7 +56,8 @@
         </div>
 
     </form>
-
+    </div>
+</div>
 @endsection
 
 @section('js')

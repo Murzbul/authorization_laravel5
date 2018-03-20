@@ -2,6 +2,8 @@
 
 @section('main-content')
 
+<div class="row justify-content-center">
+    <div class="col-10 col-md-10 col-lg-10">
     <h2 class="text-center">Lista de Roles</h2>
 
     @if(session()->has('message.level'))
@@ -54,6 +56,8 @@
         </div>
 
     </form>
+    </div>
+</div>
 
 @endsection
 
