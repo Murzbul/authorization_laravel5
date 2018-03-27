@@ -37,7 +37,7 @@
                     <td class="text-center">
                         <a class="btn btn-primary btn-sm" href="{{ route('role/editing', ['id' => $role->id]) }}">Editar</a>
                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_modal_{{ $role->id }}">Eliminar</button>
-                        @include('layouts.delete', ['id' => $role->id, 'route' => 'role/delete', 'title' => 'Rol a eliminar', 'content' => '¿Está seguro que desea eliminar el rol?' ])
+                        @include('layouts.delete', ['id' => $role->id, 'item' => $role->name, 'route' => 'role/delete', 'title' => 'Rol a eliminar', 'content' => '¿Está seguro que desea eliminar el rol?' ])
                     </td>
                 </tr>
                 @endforeach

@@ -37,7 +37,7 @@
                 <td class="text-center">
                     <a class="btn btn-primary btn-sm" href="{{ route('user/editing', ['id' => $user->id]) }}">Editar</a>
                     <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_modal_{{ $user->id }}">Eliminar</button>
-                    @include('layouts.delete', ['id' => $user->id, 'route' => 'user/delete', 'title' => 'Usuario a eliminar', 'content' => '¿Está seguro que desea eliminar al usuario?' ])
+                    @include('layouts.delete', ['id' => $user->id, 'item' => $user->name, 'route' => 'user/delete', 'title' => 'Usuario a eliminar', 'content' => '¿Está seguro que desea eliminar al usuario?' ])
                 </td>
             </tr>
             @endforeach

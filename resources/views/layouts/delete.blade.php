@@ -10,7 +10,7 @@
       </div>
       <div class="modal-body">
         <p>{{ $content }}</p>
-        <p>{{ $user->name }}</p>
+        <p>{{ $item }}</p>
       </div>
       <div class="modal-footer">
         <a class="btn btn-success" href="{{ route( $route, ['id' => $id]) }}">Si</a>
