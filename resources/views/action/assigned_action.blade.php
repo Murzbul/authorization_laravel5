@@ -39,7 +39,7 @@
             @foreach ( $roles_has_actions as $key => $actions )
             <tr>
                 <td>{{ $actions[0]->id_action }}</td>
-                <td>{{ explode("@", $actions[0]->action_uses)[1] }}</td>
+                <td>{{ $actions[0]->action_uses }}</td>
                 @foreach ( $actions as $action )
                     <td>
                         <input type='hidden' value="" name='{{$action->id_role}}-{{$action->id_action}}'>
