@@ -1,0 +1,26 @@
+version: '3.6'
+
+services:
+
+  auth_laravel:
+    build: .
+    restart: always
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - 8095:80
+    container_name: auth_laravel
+
+  mysql_auth_laravel:
+    build:
+      context: docker/mysql/
+      dockerfile: mysql.Dockerfile
+    restart: always
+    container_name: mysql_auth_laravel
+    ports:
+      - 3318:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: auth_laravel
+      MYSQL_USER: auth_laravel
+      MYSQL_PASSWORD: auth_laravel
